@@ -4,31 +4,36 @@
 #include <QOpenGLWidget>
 #include "rectilinearfigure.h"
 #include <QDebug>
+#include <QListView>
 #include <mutex>
 class GLWidget final: public QOpenGLWidget
 {
     Q_OBJECT
-    /*enum input_state{
-        NONE,           // 当前不需要缓存， needPosCnt应当为0
-        INPUTTING        // 当前正在进行缓存，needPosCnt > inputTmp.size()
-    };*/
-    std::mutex inputMtx;
-    int needPosCnt = 2;             //位置信息数量
-    std::vector<QPointF> inputTmp; // 创建图形时缓存的位置信息
 public:
-    GLWidget(QWidget *parent);
-
-protected:
-
-    void paintEvent(QPaintEvent *event) override;
+    enum class BuildState{
+        None,
+        Line,
+        Triangle,
+        Rectangle
+    };
+private:
+    QListView* loger = nullptr;
+    std::mutex inputMtx;
+    int needPosCnt = -1;             // 需要采集的点的数量
+    std::vector<QPointF> inputTmp{}; // 创建图形时缓存的位置信息
+    BuildState cs = BuildState::None;
     std::vector<RectilinearFigure> rectFigures;
+public:
+    GLWidget(QWidget *parent, QListView* lv = nullptr);
+protected:
+    void paintEvent(QPaintEvent *event)override;
     virtual void mousePressEvent(QMouseEvent *ev) override;
     virtual void mouseMoveEvent(QMouseEvent *ev) override;
     virtual void mouseReleaseEvent(QMouseEvent *ev) override;
 public slots:
-    void setneedPosCnt(size_t);
+    void setState(GLWidget::BuildState newSt);
 signals:
-    void setneedposcntSignal(int);//TODO:从btn的clicked函数发送`emit`
+    void setneedposcntSignal(GLWidget::BuildState);
 };
 
 #endif // GLWIDGET_H

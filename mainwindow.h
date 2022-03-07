@@ -3,6 +3,7 @@
 
 #include <QMainWindow>
 #include "glwidget.h"
+#include <QStringListModel>
 
 QT_BEGIN_NAMESPACE
 namespace Ui { class MainWindow; }
@@ -15,6 +16,12 @@ class MainWindow : public QMainWindow
 public:
     MainWindow(QWidget *parent = nullptr);
     ~MainWindow();
+    QStringListModel* qslm = nullptr;
+
+private slots:
+    void on_pushButton_Line_clicked();
+
+    void on_pushButton_Rectangle_clicked();
 
 private:
     Ui::MainWindow *ui;

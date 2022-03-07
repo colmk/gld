@@ -1,12 +1,14 @@
 #include "glwidget.h"
 #include <QPainter>
 #include "line.h"
+#include "triangle.h"
 #include <QMouseEvent>
 #include <mutex>
-GLWidget::GLWidget(QWidget *parent):QOpenGLWidget(parent)
+GLWidget::GLWidget(QWidget *parent, QListView* lv):QOpenGLWidget(parent),loger(lv)
 {
     setFixedSize(1121,571);
     setAutoFillBackground(false);
+    connect(this, &GLWidget::setneedposcntSignal, this, &GLWidget::setState);
 }
 
 void GLWidget::paintEvent(QPaintEvent *event)
@@ -43,16 +45,19 @@ void GLWidget::mouseReleaseEvent(QMouseEvent *ev)
         std::cout << "save Pos" << std::endl;
         inputTmp.push_back({static_cast<double>(ev->x()), static_cast<double>(ev->y())});
     }
-    if(inputTmp.size() == needPosCnt){
+
+
+    if(inputTmp.size() == needPosCnt){  // 创建完成
         std::cout << "fin" << std::endl;
-        switch(needPosCnt){
-        case 2:         // 两点线段
+        switch(cs){
+        case BuildState::Line :         // 线段
             rectFigures.push_back(Line({inputTmp[0].toPoint()},{inputTmp[1].toPoint()}));
             // TODO: 改成可变参？工厂类？
 
             break;
-        case 3:         // 三角形
+        case BuildState::Triangle :         // 三角形
             //TODO
+            rectFigures.push_back(Triangle(inputTmp[0],inputTmp[1],inputTmp[2]));
             break;
         default:
             assert(false);
@@ -65,9 +70,25 @@ void GLWidget::mouseReleaseEvent(QMouseEvent *ev)
 
 }
 
-void GLWidget::setneedPosCnt(size_t newVal)
+void GLWidget::setState(BuildState newVal)
 {
     std::lock_guard<std::mutex> lg(inputMtx);
-    needPosCnt = newVal;
+    cs = newVal;
+    switch(newVal){
+    case BuildState::Line:
+        needPosCnt = 2;
+        break;
+    case BuildState::Triangle:
+        needPosCnt = 3;
+        break;
+    case BuildState::Rectangle:
+        needPosCnt = 2;
+        break;
+    default:
+    case BuildState::None:
+        needPosCnt = -1;
+        cs = BuildState::None;
+        break;
+    }
     inputTmp.clear();
 }
