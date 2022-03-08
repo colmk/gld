@@ -24,6 +24,8 @@ RectilinearFigure::~RectilinearFigure(){
 
 void RectilinearFigure::paint(QPainter &painter)
 {
+    std::cout << __func__ << std::endl;
+    std::cout << lines.size() << std::endl;
     for(auto& iline: lines){
         painter.drawLine(iline.startPos,iline.endPos);
     }

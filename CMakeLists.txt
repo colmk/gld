@@ -29,6 +29,8 @@ set(PROJECT_SOURCES
         glwidget.h
         triangle.cpp
         triangle.h
+        rectangle.cpp
+        rectangle.h
 )
 
 if(${QT_VERSION_MAJOR} GREATER_EQUAL 6)

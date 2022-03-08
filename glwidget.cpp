@@ -2,6 +2,7 @@
 #include <QPainter>
 #include "line.h"
 #include "triangle.h"
+#include "rectangle.h"
 #include <QMouseEvent>
 #include <mutex>
 GLWidget::GLWidget(QWidget *parent, QListView* lv):QOpenGLWidget(parent),loger(lv)
@@ -45,19 +46,17 @@ void GLWidget::mouseReleaseEvent(QMouseEvent *ev)
         std::cout << "save Pos" << std::endl;
         inputTmp.push_back({static_cast<double>(ev->x()), static_cast<double>(ev->y())});
     }
-
-
     if(inputTmp.size() == needPosCnt){  // 创建完成
         std::cout << "fin" << std::endl;
         switch(cs){
         case BuildState::Line :         // 线段
             rectFigures.push_back(Line({inputTmp[0].toPoint()},{inputTmp[1].toPoint()}));
-            // TODO: 改成可变参？工厂类？
-
             break;
-        case BuildState::Triangle :         // 三角形
-            //TODO
+        case BuildState::Triangle :     // 三角形
             rectFigures.push_back(Triangle(inputTmp[0],inputTmp[1],inputTmp[2]));
+            break;
+        case BuildState::Rectangle:
+            rectFigures.push_back(Rectangle(inputTmp[0],inputTmp[1]));
             break;
         default:
             assert(false);

@@ -22,9 +22,14 @@ void MainWindow::on_pushButton_Line_clicked()
     emit glw->setneedposcntSignal(GLWidget::BuildState::Line);
 }
 
-
-void MainWindow::on_pushButton_Rectangle_clicked()
+void MainWindow::on_pushButton_Triangle_clicked()
 {
     emit glw->setneedposcntSignal(GLWidget::BuildState::Triangle);
 }
+
+void MainWindow::on_pushButton_Rectangle_clicked()
+{
+    emit glw->setneedposcntSignal(GLWidget::BuildState::Rectangle);
+}
+
 

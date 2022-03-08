@@ -23,6 +23,8 @@ private slots:
 
     void on_pushButton_Rectangle_clicked();
 
+    void on_pushButton_Triangle_clicked();
+
 private:
     Ui::MainWindow *ui;
     GLWidget *glw;
