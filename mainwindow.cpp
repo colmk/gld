@@ -6,9 +6,9 @@ MainWindow::MainWindow(QWidget *parent)
     , ui(new Ui::MainWindow)
 {
     ui->setupUi(this);
-    glw = new GLWidget(this);
+    glw = new GLWidget(this,ui->listWidget);
     glw->setGeometry(210,150,1121,571);
-    ui->listView->setModel(qslm);
+    ui->listWidget->addItem("泥吼");
 }
 
 MainWindow::~MainWindow()

@@ -4,7 +4,7 @@
 #include <QOpenGLWidget>
 #include "rectilinearfigure.h"
 #include <QDebug>
-#include <QListView>
+#include <QListWidget>
 #include <mutex>
 class GLWidget final: public QOpenGLWidget
 {
@@ -17,14 +17,14 @@ public:
         Rectangle
     };
 private:
-    QListView* loger = nullptr;
+    QListWidget* loger = nullptr;
     std::mutex inputMtx;
     int needPosCnt = -1;             // 需要采集的点的数量
     std::vector<QPointF> inputTmp{}; // 创建图形时缓存的位置信息
     BuildState cs = BuildState::None;
     std::vector<RectilinearFigure> rectFigures;
 public:
-    GLWidget(QWidget *parent, QListView* lv = nullptr);
+    GLWidget(QWidget *parent, QListWidget* lv = nullptr);
 protected:
     void paintEvent(QPaintEvent *event)override;
     virtual void mousePressEvent(QMouseEvent *ev) override;
