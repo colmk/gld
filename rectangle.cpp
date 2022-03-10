@@ -8,8 +8,7 @@ Rectangle::Rectangle(QPointF _pos1, QPointF _pos2, QPointF _pos3, QPointF _pos4,
     lines.push_back(StraightLine(pos2,pos3));
     lines.push_back(StraightLine(pos3,pos4));
     lines.push_back(StraightLine(pos4,pos1));
-    if(loger)
-    loger->addItem("Create Rectangle : (" +
+    record("Create Rectangle : (" +
                    QString::number(pos1.x()) + "," + QString::number(pos1.y()) + ") (" +
                    QString::number(pos2.x()) + "," + QString::number(pos2.y())+ ") (" +
                    QString::number(pos3.x()) + "," + QString::number(pos3.y())+ ") (" +
@@ -24,8 +23,7 @@ Rectangle::Rectangle(QPointF _pos1, QPointF _pos2, QListWidget* _loger):
     lines.push_back(StraightLine(pos2,pos3));
     lines.push_back(StraightLine(pos3,pos4));
     lines.push_back(StraightLine(pos4,pos1));
-    if(loger)
-        loger->addItem("Create Rectangle : (" +
+    record("Create Rectangle : (" +
                        QString::number(pos1.x()) + "," + QString::number(pos1.y()) + ") (" +
                        QString::number(pos2.x()) + "," + QString::number(pos2.y())+ ") (" +
                        QString::number(pos3.x()) + "," + QString::number(pos3.y())+ ") (" +

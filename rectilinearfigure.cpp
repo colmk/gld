@@ -11,6 +11,18 @@ void RectilinearFigure::Move(const QPointF &offsetPos){
     }
 }
 
+void RectilinearFigure::record(const QString &logStr)
+{
+    if(loger)
+        loger->addItem("Figure " + QString::number(id)+ "\t" + logStr);
+}
+
+RectilinearFigure::RectilinearFigure()
+{
+    static uint32_t id_genrator;
+    _id = ++id_genrator;
+}
+
 RectilinearFigure::~RectilinearFigure(){
     loger = nullptr;
 }
