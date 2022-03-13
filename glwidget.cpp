@@ -5,7 +5,10 @@
 #include "rectangle.h"
 #include <QMouseEvent>
 #include <mutex>
-GLWidget::GLWidget(QWidget *parent, QListWidget* lv):QOpenGLWidget(parent),loger(lv)
+GLWidget::GLWidget(QWidget *parent, QListWidget* lv, QStandardItemModel* qsim)
+    :QOpenGLWidget(parent)
+    ,loger(lv)
+    ,qsim(qsim)
 {
     setFixedSize(1121,571);
     setAutoFillBackground(false);
@@ -50,13 +53,13 @@ void GLWidget::mouseReleaseEvent(QMouseEvent *ev)
         std::cout << "fin" << std::endl;
         switch(cs){
         case BuildState::Line :         // 线段
-            rectFigures.push_back(Line({inputTmp[0].toPoint()},{inputTmp[1].toPoint()},loger));
+            rectFigures.push_back(Line({inputTmp[0].toPoint()},{inputTmp[1].toPoint()},qsim,loger));
             break;
         case BuildState::Triangle :     // 三角形
-            rectFigures.push_back(Triangle(inputTmp[0],inputTmp[1],inputTmp[2], loger));
+            rectFigures.push_back(Triangle(inputTmp[0],inputTmp[1],inputTmp[2],qsim, loger));
             break;
         case BuildState::Rectangle:
-            rectFigures.push_back(Rectangle(inputTmp[0],inputTmp[1], loger));
+            rectFigures.push_back(Rectangle(inputTmp[0],inputTmp[1],qsim, loger));
             break;
         default:
             assert(false);

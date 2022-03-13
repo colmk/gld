@@ -3,6 +3,7 @@
 
 #include <QOpenGLWidget>
 #include "rectilinearfigure.h"
+#include <QStandardItemModel>
 #include <QDebug>
 #include <QListWidget>
 #include <mutex>
@@ -17,6 +18,7 @@ public:
         Rectangle
     };
 private:
+    QStandardItemModel *qsim;
     QListWidget* loger = nullptr;
     std::mutex inputMtx;
     int needPosCnt = -1;             // 需要采集的点的数量
@@ -24,7 +26,7 @@ private:
     BuildState cs = BuildState::None;
     std::vector<RectilinearFigure> rectFigures;
 public:
-    GLWidget(QWidget *parent, QListWidget* lv = nullptr);
+    GLWidget(QWidget *parent, QListWidget* lv = nullptr, QStandardItemModel* qsim = nullptr);
 protected:
     void paintEvent(QPaintEvent *event)override;
     virtual void mousePressEvent(QMouseEvent *ev) override;

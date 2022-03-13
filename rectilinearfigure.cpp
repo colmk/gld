@@ -17,7 +17,9 @@ void RectilinearFigure::record(const QString &logStr)
         loger->addItem("Figure " + QString::number(id)+ "\t" + logStr);
 }
 
-RectilinearFigure::RectilinearFigure()
+RectilinearFigure::RectilinearFigure(QListWidget *loger, QStandardItemModel* qsim)
+    :loger(loger)
+    ,qsim(qsim)
 {
     static uint32_t id_genrator;
     _id = ++id_genrator;

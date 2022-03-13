@@ -31,6 +31,8 @@ set(PROJECT_SOURCES
         triangle.h
         rectangle.cpp
         rectangle.h
+        treemodel.cpp
+        treemodel.h
 )
 
 if(${QT_VERSION_MAJOR} GREATER_EQUAL 6)

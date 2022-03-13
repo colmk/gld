@@ -5,7 +5,8 @@
 #include <QPainter>
 #include <QListWidget>
 #include "straightline.h"
-
+#include <QStandardItemModel>
+//TODO: 改造成工厂？ 新创工厂类？
 class RectilinearFigure
 {
 private:
@@ -15,9 +16,10 @@ protected:
     QVector<StraightLine> lines;
     QPointF center;
     QListWidget *loger = nullptr;
+    QStandardItemModel* qsim = nullptr;
     void record(const QString& logHead);
 public:
-    RectilinearFigure();
+    RectilinearFigure(QListWidget *loge, QStandardItemModel* qsim);
     void Rotate(const QPointF &rotCenterPos, const double& angle);
     void Move(const QPointF &offsetPos);
     virtual ~RectilinearFigure();

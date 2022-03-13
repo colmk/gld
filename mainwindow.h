@@ -3,7 +3,8 @@
 
 #include <QMainWindow>
 #include "glwidget.h"
-#include <QStringListModel>
+//#include "treemodel.h"
+#include "QStandardItemModel"
 
 QT_BEGIN_NAMESPACE
 namespace Ui { class MainWindow; }
@@ -16,7 +17,6 @@ class MainWindow : public QMainWindow
 public:
     MainWindow(QWidget *parent = nullptr);
     ~MainWindow();
-    QStringListModel* qslm = nullptr;
 
 private slots:
     void on_pushButton_Line_clicked();
@@ -28,5 +28,8 @@ private slots:
 private:
     Ui::MainWindow *ui;
     GLWidget *glw;
+    QStandardItemModel *qsim;
+    //treeModel *tm;
+
 };
 #endif // MAINWINDOW_H
