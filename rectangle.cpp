@@ -1,6 +1,6 @@
 #include "rectangle.h"
 #include <iostream>
-Rectangle::Rectangle(QPointF _pos1, QPointF _pos2, QPointF _pos3, QPointF _pos4 ,QStandardItemModel* _qsil , QListWidget* _loger)
+Rect::Rect(QPointF _pos1, QPointF _pos2, QPointF _pos3, QPointF _pos4 ,QStandardItemModel* _qsil , QListWidget* _loger)
     :RectilinearFigure(_loger,_qsil),
     pos1(_pos1), pos2(_pos2), pos3(_pos3),pos4(_pos4)
 {
@@ -21,7 +21,7 @@ Rectangle::Rectangle(QPointF _pos1, QPointF _pos2, QPointF _pos3, QPointF _pos4 
 
 }
 
-Rectangle::Rectangle(QPointF _pos1, QPointF _pos2, QStandardItemModel* _qsil , QListWidget* _loger)
+Rect::Rect(QPointF _pos1, QPointF _pos2, QStandardItemModel* _qsil , QListWidget* _loger)
     :RectilinearFigure(_loger,_qsil),
     pos1(_pos1.x(),_pos1.y()),pos2(_pos1.x(),_pos2.y()),pos3(_pos2.x(),_pos2.y()),pos4(_pos2.x(),_pos1.y())
 {

@@ -32,6 +32,22 @@ void GLWidget::paintEvent(QPaintEvent *event)
     painter.end();
 }
 
+void GLWidget::initializeGL()
+{
+
+     QOpenGLFunctions *f = QOpenGLContext::currentContext()->functions();
+     f->glClearColor(.99f, 0.99f, 0.99f, 0.0f);
+}
+
+void GLWidget::resizeGL(int w, int h)
+{
+}
+
+void GLWidget::paintGL()
+{
+
+}
+
 void GLWidget::mousePressEvent(QMouseEvent *ev)
 {
 
@@ -46,7 +62,7 @@ void GLWidget::mouseReleaseEvent(QMouseEvent *ev)
 {
     std::lock_guard<std::mutex> lg(inputMtx);
     if(inputTmp.size() < needPosCnt){
-        std::cout << "save Pos" << std::endl;
+        qDebug("save Pos");
         inputTmp.push_back({static_cast<double>(ev->x()), static_cast<double>(ev->y())});
     }
     if(inputTmp.size() == needPosCnt){  // 创建完成
@@ -59,7 +75,7 @@ void GLWidget::mouseReleaseEvent(QMouseEvent *ev)
             rectFigures.push_back(Triangle(inputTmp[0],inputTmp[1],inputTmp[2],qsim, loger));
             break;
         case BuildState::Rectangle:
-            rectFigures.push_back(Rectangle(inputTmp[0],inputTmp[1],qsim, loger));
+            rectFigures.push_back( Rect(inputTmp[0],inputTmp[1],qsim, loger));
             break;
         default:
             assert(false);
