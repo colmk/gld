@@ -7,10 +7,9 @@
 #include <mutex>
 GLWidget::GLWidget(QWidget *parent, QListWidget* lv, QStandardItemModel* qsim)
     :QOpenGLWidget(parent)
-    ,loger(lv)
     ,qsim(qsim)
+    ,loger(lv)
 {
-    setFixedSize(1121,571);
     setAutoFillBackground(false);
     connect(this, &GLWidget::setneedposcntSignal, this, &GLWidget::setState);
 }

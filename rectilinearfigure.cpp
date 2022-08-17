@@ -4,7 +4,7 @@
 void RectilinearFigure::Move(const QPointF &offsetPos){
     if(loger){
         loger->addItem("MOVE: offset " + QString::number(offsetPos.x()) + " " + QString::number(offsetPos.y()));
-        // TODO: 日志
+        // TODO
     }
     for(auto &iline:lines){
         iline.StraightLine::move(offsetPos);

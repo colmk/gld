@@ -6,7 +6,7 @@
 #include <QListWidget>
 #include "straightline.h"
 #include <QStandardItemModel>
-//TODO: 改造成工厂？ 新创工厂类？
+
 class RectilinearFigure
 {
 private:

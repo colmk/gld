@@ -11,10 +11,8 @@ MainWindow::MainWindow(QWidget *parent)
     qsim->appendRow(new QStandardItem("Line"));
     qsim->appendRow(new QStandardItem("Triangle"));
     qsim->appendRow(new QStandardItem("Rectangle"));
-    //tm = new treeModel(this);
-    glw->setGeometry(210,150,1121,571);
-    ui->listWidget->addItem("泥吼");
-    //ui->treeView->setModel(tm);
+    glw->setGeometry(212,0,1121,571);
+    glw->setFixedSize(1121,720);
     ui->treeView->setModel(qsim);
 }
 
